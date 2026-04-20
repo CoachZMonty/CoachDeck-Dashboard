@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlete Management System Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        nav {
+            background: #35424a;
+            color: #ffffff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #35424a;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        const storeData = (key, value) => {
+            localStorage.setItem(key, JSON.stringify(value));
+        };
+
+        const getData = (key) => {
+            return JSON.parse(localStorage.getItem(key));
+        };
+
+        // Example function to store athlete info
+        const addAthlete = () => {
+            let athlete = {
+                name: document.getElementById('athleteName').value,
+                age: document.getElementById('athleteAge').value,
+                team: document.getElementById('athleteTeam').value
+            };
+            let athletes = getData('athletes') || [];
+            athletes.push(athlete);
+            storeData('athletes', athletes);
+            document.getElementById('athleteForm').reset();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Athlete Management System Dashboard</h1>
+    </header>
+    <div class="container">
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#athlete-management">Athlete Management</a>
+            <a href="#teams">Teams</a>
+            <a href="#performance-tracking">Performance Tracking</a>
+            <a href="#health-monitoring">Health Monitoring</a>
+            <a href="#schedule-management">Schedule Management</a>
+        </nav>
+        <section id="overview">
+            <h2>Dashboard Overview</h2>
+            <p>Welcome to the Athlete Management System. Use the navigation to explore features.</p>
+        </section>
+        <section id="athlete-management">
+            <h2>Athlete Management</h2>
+            <form id="athleteForm" onsubmit="event.preventDefault(); addAthlete();">
+                <input type="text" id="athleteName" placeholder="Athlete Name" required />
+                <input type="number" id="athleteAge" placeholder="Age" required />
+                <input type="text" id="athleteTeam" placeholder="Team" required />
+                <input type="submit" value="Add Athlete" />
+            </form>
+            <h3>Athlete List</h3>
+            <ul id="athleteList"></ul>
+        </section>
+        <section id="teams">
+            <h2>Teams</h2>
+            <p>Manage teams for athletes.</p>
+        </section>
+        <section id="performance-tracking">
+            <h2>Performance Tracking</h2>
+            <p>Track the performance of athletes.</p>
+        </section>
+        <section id="health-monitoring">
+            <h2>Health Monitoring</h2>
+            <p>Monitor the health of your athletes.</p>
+        </section>
+        <section id="schedule-management">
+            <h2>Schedule Management</h2>
+            <p>Manage the schedule of practices and games.</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2026 Athlete Management System</p>
+    </footer>
+</body>
+</html>
